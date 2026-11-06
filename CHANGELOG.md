@@ -24,6 +24,37 @@ Prototype workflow for testing the wah with a mono microphone in TouchDesigner b
 4. Compare the dry and processed audio with separate Audio Spectrum CHOPs in **Visualization** mode. Send the processed spectrum through CHOP to TOP for the stream visual. Keep playback on the reconstructed audio CHOP path.
 5. Sweep the pedal while making a steady “shhh” sound. Use Audio File Out CHOP to record a WAV if needed. Once the manual sweep is clean, switch the input to guitar and drive the pedal with calibrated MediaPipe `jawOpen`.
 
+#### FFT wah callback
+
+Inside `fft_wah`, create a Constant CHOP named `pedal` (start at `0.5`). Paste this into the callbacks DAT for the `wah_mask` Script CHOP. Keep `mic_in`, `pedal`, and `wah_mask` in the same network.
+
+```text
+mic_in → fft_in → wah_mask → fft_back → Math CHOP → Audio Device Out CHOP
+```
+
+```python
+import numpy as np
+
+
+def onCook(scriptOp):
+    src = scriptOp.inputs[0]
+    scriptOp.copy(src)  # Preserve channel names, sample rate, and phase.
+
+    pedal = float(np.clip(op('pedal')[0].eval(), 0.0, 1.0))
+    center_hz = 350.0 * (2200.0 / 350.0) ** pedal
+
+    fft_size = 2048  # Match fft_in's FFT Size.
+    sample_rate = op('mic_in').rate
+    hz = np.arange(src.numSamples) * sample_rate / fft_size
+    octaves = np.log2(np.maximum(hz, 1.0) / center_hz)
+    gain = 0.15 + 0.85 * np.exp(-0.5 * (octaves / 0.5) ** 2)
+
+    for channel in src.chans('*_m'):
+        scriptOp[channel.name].vals = (
+            np.asarray(channel.vals) * gain
+        ).tolist()
+```
+
 Live FFT round-trip playback and guitar tracking still need validation.
 
 ## 2026-11-05 — Mouth Wah Mini prototype
