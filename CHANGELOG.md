@@ -16,6 +16,20 @@ Twitch channel: [xidist](https://www.twitch.tv/xidist).
 
 ### FFT wah prototype
 
+#### Mono mic FFT round trip
+
+The screenshot shows the raw mono speech input (`mic_in1`) and the baseline routing note. Use that signal as `mic_in` for the first playback test:
+
+```text
+mic_in → fft_in → fft_back → Math CHOP → Audio Device Out CHOP
+```
+
+Check the forward and inverse FFT with no wah mask first. Use the Math CHOP to lower the monitoring level, then insert `wah_mask` between `fft_in` and `fft_back` once the reconstructed voice sounds clean.
+
+![TouchDesigner mono mic waveform and FFT round-trip routing](Image/mic-fft-round-trip.png)
+
+#### Prototype steps
+
 Prototype workflow for testing the wah with a mono microphone in TouchDesigner before connecting the guitar:
 
 1. Inside a Base COMP named `fft_wah`, route `mic_in` through an Audio Spectrum CHOP in **Time to Magnitude and Phase** mode with a 2,048-sample FFT.
