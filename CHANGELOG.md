@@ -28,6 +28,19 @@ Check the forward and inverse FFT with no wah mask first. Use the Math CHOP to l
 
 ![TouchDesigner mono mic waveform and FFT round-trip routing](Image/mic-fft-round-trip.png)
 
+#### Parallel FFT paths and wah mask
+
+Inside `/project1/mouth_wah_mini/fft_wah`, the mono mic input feeds `fft_in`. Its magnitude (`_m`) and phase (`_p`) channels feed two parallel paths:
+
+```text
+mic_in1 → fft_in ─┬─→ audiospect2          (unmasked reference path)
+                  └─→ script1 → fft_back  (wah path)
+```
+
+- `script1` is the Script CHOP for the wah mask (`wah_mask` in the prototype instructions). Its `script1_callbacks` DAT should apply the pedal-dependent gain to magnitude bins and preserve phase.
+- The network annotation shows an 8,192-sample FFT window. Confirm the actual **FFT Size** on `fft_in` and use that same value for `fft_size` in the callback. The 2,048-sample value below is the earlier starting point. If the input node is still named `mic_in1`, update the callback’s sample-rate lookup to match.
+- The screenshot still shows `fft_back` in **Time to Magnitude and Phase** mode. Switch it to **Magnitude and Phase to Time**, then route its waveform through a Math CHOP for level and into Audio Device Out CHOP. Verify the unmasked reference before listening to the wah path.
+
 #### Prototype steps
 
 Prototype workflow for testing the wah with a mono microphone in TouchDesigner before connecting the guitar:
