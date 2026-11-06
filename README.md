@@ -1,0 +1,66 @@
+# Mouth Wah Mini
+
+**A webcam-controlled guitar wah built in TouchDesigner.**
+
+Open your mouth to sweep the wah toward a brighter sound. Close it to bring the sweep back down. The webcam acts like an expression pedal, leaving both hands free to play.
+
+This project grew out of Finger Fuzz, a prototype that used a thumb–index pinch to control a guitar effect. Mouth Wah Mini keeps the camera-driven interaction and moves the control to your jaw.
+
+## Signal flow
+
+```mermaid
+flowchart TD
+    subgraph V["Vision and control"]
+        CAM["Webcam"] --> MP["MediaPipe face tracking"]
+        MP -->|jawOpen blend shape| CTRL["Calibrate pedal position"]
+        MP -->|Camera video| HUD["OpenCV preview"]
+        CTRL -->|Jaw score and target frequency| HUD
+    end
+    subgraph A["Guitar audio"]
+        GUITAR["Electric guitar"] -->|Quarter-inch cable| USB["Vetco USB-C interface"]
+        USB -->|USB audio| IN["Audio Device In"]
+        IN --> WAH["Resonant wah filter"]
+        WAH --> OUT["Audio Device Out"]
+    end
+    CTRL -->|Sweep 350 Hz to 2.2 kHz| WAH
+
+    classDef vision fill:#164e63,color:#fff,stroke:#67e8f9
+    classDef audio fill:#4c1d95,color:#fff,stroke:#c4b5fd
+    classDef effect fill:#14532d,color:#fff,stroke:#86efac
+    class CAM,MP,CTRL,HUD vision
+    class GUITAR,USB,IN,OUT audio
+    class WAH effect
+```
+
+MediaPipe estimates jaw opening. TouchDesigner maps the score to a pedal position and smooths the sweep with a 45 ms time constant. A state-variable band-pass filter processes the guitar in a Script CHOP. OpenCV draws the jaw score, target frequency, and pedal meter over the camera feed.
+
+## Run it on Windows
+
+You'll need TouchDesigner, a webcam, the [MediaPipe TouchDesigner plugin](https://github.com/torinmb/mediapipe-touchdesigner), and a guitar connected to the Vetco interface or another audio interface. The preview meter uses OpenCV (`cv2`). The audio effect works independently of the preview.
+
+If the saved project already contains `mouth_wah_mini`, open it and go straight to step 3. To rebuild the patch from source, use the [Python builder](./Mouth_Wah_Mini_Builder.py).
+
+1. **Start the tracker.** Open the MediaPipe demo `.toe`. Select your webcam on the `MediaPipe` component, enable **Face Tracking**, and enable **Blend Shapes** if your version has that option. Check that `jawOpen` moves in the `face_tracking` blend-shape CHOP.
+2. **Build the patch.** Open **Dialogs → Textport** and run this as one line. Replace the path with the location of your copy of the builder.
+
+   ```python
+   exec(compile(open(r'C:/path/to/Mouth_Wah_Mini_Builder.py', encoding='utf-8').read(), 'Mouth_Wah_Mini_Builder.py', 'exec'))
+   ```
+
+3. **Connect and calibrate.** On the **Mouth Wah** page of `/project1/mouth_wah_mini`, set **Jaw CHOP** to the blend-shape CHOP and **Camera TOP** to the MediaPipe video output. View `OUT_VIDEO` and set **Jaw Closed** and **Jaw Open** to the scores you can comfortably reach while playing. The starting values are 0.04 and 0.55.
+4. **Route the guitar.** In `guitar_in`, select the Vetco recording device. If needed, set **Guitar Channel** to the active input index, starting at zero. Select your playback device in `speakers`, lower **Volume**, and switch **Active** on. Start with wired playback. Save the configured patch as a new `.toe`.
+
+## Try the controls
+
+| What you want to test | What to do |
+| --- | --- |
+| Hear the full sweep | Strum a sustained chord, then slowly open and close your mouth. |
+| Test audio before connecting the camera | Leave **Jaw CHOP** empty and move **Manual Pedal** from 0 to 1. |
+| Fade back to dry when you leave the frame | Connect a 0/1 tracking signal to **Face Present CHOP** and name its channel. If the tracker sends zero jaw scores and no presence signal is wired, the wah stays at the dark end. |
+| Diagnose a missing meter | Run `import cv2; print(cv2.__version__)` in Textport. If OpenCV is unavailable, the preview passes through the camera image. |
+
+The jaw mapping, filter sweep, stereo output, and dry fade were checked with simulated inputs. Live tracking, device routing, and playback latency depend on the local TouchDesigner setup.
+
+## Get the project files
+
+The large TouchDesigner `.toe` files use [Git LFS](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage). After cloning, run `git lfs pull` if you need to fetch the project binaries.
