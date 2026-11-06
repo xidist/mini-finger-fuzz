@@ -14,6 +14,12 @@ See the OBS speech captions in the [live caption demo (.mov)](Movie/live-caption
 
 Twitch channel: [xidist](https://www.twitch.tv/xidist).
 
+![Looping preview of the November 6 Gyazo demo](Image/2026-11-06-gyazo-demo.gif)
+
+[Open the full Gyazo MP4 with audio](Movie/2026-11-06-gyazo-demo.mp4). The preview loops silently.
+
+November 6 stream clip: [Watch on Twitch](https://www.twitch.tv/xidist/clip/SpeedySavagePelicanImGlitch-sberb_aqld4mX5q8) · [Download the MP4](Movie/2026-11-06-twitch-demo.mp4).
+
 ### FFT wah prototype
 
 #### Mono mic FFT round trip

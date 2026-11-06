@@ -6,6 +6,14 @@ Open your mouth to sweep the wah toward a brighter sound. Close it to bring the 
 
 This project grew out of Finger Fuzz, a prototype that used a thumb–index pinch to control a guitar effect. Mouth Wah Mini keeps the camera-driven interaction and moves the control to your jaw.
 
+## Stream demo
+
+![Looping preview of the November 6 Gyazo demo](Image/2026-11-06-gyazo-demo.gif)
+
+[Open the full Gyazo MP4 with audio](Movie/2026-11-06-gyazo-demo.mp4). The preview loops silently.
+
+[Watch the Twitch clip](https://www.twitch.tv/xidist/clip/SpeedySavagePelicanImGlitch-sberb_aqld4mX5q8) · [Download the MP4](Movie/2026-11-06-twitch-demo.mp4)
+
 ## Signal flow
 
 ```mermaid
