@@ -51,6 +51,19 @@ Prototype workflow for testing the wah with a mono microphone in TouchDesigner b
 4. Compare the dry and processed audio with separate Audio Spectrum CHOPs in **Visualization** mode. Send the processed spectrum through CHOP to TOP for the stream visual. Keep playback on the reconstructed audio CHOP path.
 5. Sweep the pedal while making a steady “shhh” sound. Use Audio File Out CHOP to record a WAV if needed. Once the manual sweep is clean, switch the input to guitar and drive the pedal with calibrated MediaPipe `jawOpen`.
 
+#### Manual pedal control
+
+Add a Constant CHOP named `pedal` inside `fft_wah` and set its first value to `0.5`. Leave it unwired: the `wah_mask` Script CHOP reads the first channel by name.
+
+```text
+Audio Device In → fft_wah input
+Inside fft_wah: mic_in1 → fft_in → wah_mask → fft_back → math1 → audiodevout1
+                                  ↑
+                      pedal (Python lookup; no wire)
+```
+
+Sweep the Constant from `0` to `1` while making a steady “shhh” sound. The script clamps the control to that range and sweeps the center frequency from 350 Hz to 2,200 Hz. The reconstructed audio remains centered at zero, with positive and negative samples. Once the manual sweep is verified, feed a calibrated MediaPipe `jawOpen` channel into the pedal control.
+
 #### FFT wah callback
 
 The current patch wires `fft_in → wah_mask → fft_back → math1 → audiodevout1`. The callback reads the sample rate from `mic_in1` and the FFT size from `fft_in`, so it follows the configured window size.
