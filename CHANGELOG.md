@@ -117,6 +117,24 @@ def onCook(scriptOp):
 
 The screenshot shows a waveform downstream of `fft_back` and an error badge on `wah_mask`. Check that error and confirm the pedal audibly changes the output. Guitar testing is still pending.
 
+### VDO.Ninja camera preview
+
+TouchDesigner Web Render TOP displaying the VDO.Ninja camera feed in the Mouth Wah Mini network.
+
+![VDO.Ninja camera feed preview in TouchDesigner](Image/vdo-ninja-web-render-preview.png)
+
+### kiki was harmonizing and singing with it
+
+**1:07 PM CST**
+
+Kiki sang and harmonized along with David Holmes' NTS set. [Listen to the November 24, 2025 episode on NTS](https://www.nts.live/shows/david-holmes/episodes/david-holmes-24th-november-2025).
+
+![TouchDesigner Audio Device In CHOP waveform](Image/2026-11-06-kiki-audio-waveform.png)
+
+![David Holmes episode page on NTS](Image/2026-11-06-david-holmes-nts.png)
+
+![TouchDesigner audio input and live captions alongside the NTS player](Image/2026-11-06-nts-live-captions.png)
+
 ## 2026-11-05 — Mouth Wah Mini prototype
 
 ### Added
