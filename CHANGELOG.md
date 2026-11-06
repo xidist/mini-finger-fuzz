@@ -14,6 +14,18 @@ See the OBS speech captions in the [live caption demo (.mov)](Movie/live-caption
 
 Twitch channel: [xidist](https://www.twitch.tv/xidist).
 
+### FFT wah prototype
+
+Prototype workflow for testing the wah with a mono microphone in TouchDesigner before connecting the guitar:
+
+1. Inside a Base COMP named `fft_wah`, route `mic_in` through an Audio Spectrum CHOP in **Time to Magnitude and Phase** mode with a 2,048-sample FFT.
+2. Verify the unmodified round trip first: send magnitude and phase into a second Audio Spectrum CHOP in **Magnitude and Phase to Time** mode. Monitor the result through Audio Device Out CHOP at low gain with headphones.
+3. Insert a Script CHOP between the transforms. Map a manual pedal from 0 to 1 onto a logarithmic sweep from 350 Hz to 2.2 kHz: `center_hz = 350 * (2200 / 350) ** pedal`. Multiply only the magnitude bins by a smooth peak centered at that frequency, leaving phase unchanged. For a bin frequency `f`, use `gain = 0.15 + 0.85 * exp(-0.5 * (log2(max(f, 1) / center_hz) / 0.5) ** 2)`.
+4. Compare the dry and processed audio with separate Audio Spectrum CHOPs in **Visualization** mode. Send the processed spectrum through CHOP to TOP for the stream visual. Keep playback on the reconstructed audio CHOP path.
+5. Sweep the pedal while making a steady “shhh” sound. Use Audio File Out CHOP to record a WAV if needed. Once the manual sweep is clean, switch the input to guitar and drive the pedal with calibrated MediaPipe `jawOpen`.
+
+Live FFT round-trip playback and guitar tracking still need validation.
+
 ## 2026-11-05 — Mouth Wah Mini prototype
 
 ### Added
