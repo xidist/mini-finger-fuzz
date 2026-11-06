@@ -20,6 +20,10 @@ Twitch channel: [xidist](https://www.twitch.tv/xidist).
 
 November 6 stream clip: [Watch on Twitch](https://www.twitch.tv/xidist/clip/SpeedySavagePelicanImGlitch-sberb_aqld4mX5q8) · [Download the MP4](Movie/2026-11-06-twitch-demo.mp4).
 
+Instagram: [@xidist.xyz](https://www.instagram.com/xidist.xyz/).
+
+![Guitar camera in TouchDesigner alongside the xidist.xyz Instagram profile](Image/guitar-instagram-preview.png)
+
 ### FFT wah prototype
 
 #### Mono mic FFT round trip
