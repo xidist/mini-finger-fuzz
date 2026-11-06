@@ -38,7 +38,7 @@ mic_in1 → fft_in ─┬─→ audiospect2          (unmasked reference path)
 ```
 
 - `script1` is the Script CHOP for the wah mask (`wah_mask` in the prototype instructions). Its `script1_callbacks` DAT should apply the pedal-dependent gain to magnitude bins and preserve phase.
-- The network annotation shows an 8,192-sample FFT window. Confirm the actual **FFT Size** on `fft_in` and use that same value for `fft_size` in the callback. The 2,048-sample value below is the earlier starting point. If the input node is still named `mic_in1`, update the callback’s sample-rate lookup to match.
+- The network annotation shows an 8,192-sample FFT window. The callback reads the actual FFT Size from `fft_in`; 2,048 samples was the earlier prototype starting point.
 - The screenshot still shows `fft_back` in **Time to Magnitude and Phase** mode. Switch it to **Magnitude and Phase to Time**, then route its waveform through a Math CHOP for level and into Audio Device Out CHOP. Verify the unmasked reference before listening to the wah path.
 
 #### Prototype steps
@@ -53,7 +53,11 @@ Prototype workflow for testing the wah with a mono microphone in TouchDesigner b
 
 #### FFT wah callback
 
-Inside `fft_wah`, create a Constant CHOP named `pedal` (start at `0.5`). Paste this into the callbacks DAT for the `wah_mask` Script CHOP. Keep `mic_in`, `pedal`, and `wah_mask` in the same network.
+The current patch wires `fft_in → wah_mask → fft_back → math1 → audiodevout1`. The callback reads the sample rate from `mic_in1` and the FFT size from `fft_in`, so it follows the configured window size.
+
+![TouchDesigner wah mask callback and audio playback wiring](Image/fft-wah-callback.png)
+
+Inside `fft_wah`, add a Constant CHOP named `pedal` and start its first value at `0.5`. Paste this into the callbacks DAT for `wah_mask`:
 
 ```text
 mic_in → fft_in → wah_mask → fft_back → Math CHOP → Audio Device Out CHOP
@@ -64,25 +68,31 @@ import numpy as np
 
 
 def onCook(scriptOp):
-    src = scriptOp.inputs[0]
-    scriptOp.copy(src)  # Preserve channel names, sample rate, and phase.
+    if not scriptOp.inputs:
+        scriptOp.clear()
+        return
 
-    pedal = float(np.clip(op('pedal')[0].eval(), 0.0, 1.0))
+    fft_in = scriptOp.inputs[0]
+    scriptOp.copy(fft_in)  # Preserve channel names, sample rate, and phase.
+
+    network = scriptOp.parent()
+    sample_rate = network.op('mic_in1').rate
+    fft_size = int(fft_in.par.fftsize.eval())
+    pedal = float(np.clip(network.op('pedal')[0].eval(), 0.0, 1.0))
     center_hz = 350.0 * (2200.0 / 350.0) ** pedal
-
-    fft_size = 2048  # Match fft_in's FFT Size.
-    sample_rate = op('mic_in').rate
-    hz = np.arange(src.numSamples) * sample_rate / fft_size
+    hz = np.arange(fft_in.numSamples) * sample_rate / fft_size
     octaves = np.log2(np.maximum(hz, 1.0) / center_hz)
     gain = 0.15 + 0.85 * np.exp(-0.5 * (octaves / 0.5) ** 2)
 
-    for channel in src.chans('*_m'):
+    for channel in fft_in.chans('*_m'):
         scriptOp[channel.name].vals = (
             np.asarray(channel.vals) * gain
         ).tolist()
 ```
 
-Live FFT round-trip playback and guitar tracking still need validation.
+`onCook()` writes its output to `scriptOp` and returns `None`. If you keep `onGetCookLevel()`, return `CookLevel.AUTOMATIC` there.
+
+The screenshot shows a waveform downstream of `fft_back` and an error badge on `wah_mask`. Check that error and confirm the pedal audibly changes the output. Guitar testing is still pending.
 
 ## 2026-11-05 — Mouth Wah Mini prototype
 
