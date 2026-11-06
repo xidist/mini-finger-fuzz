@@ -2,11 +2,17 @@
 
 Progress notes for Finger Fuzz and its current Mouth Wah Mini prototype.
 
-## 2026-11-06 — Audio spectrum demo
+## 2026-11-06 — Audio spectrum and live captions
 
 Added a live audio spectrum for the microphone used for speech captions.
 
 ![Audio spectrum demo](https://i.gyazo.com/238a7d869fa00c4d371178f9cf0b18e7.gif)
+
+### Live captions
+
+See the OBS speech captions in the [live caption demo (.mov)](Movie/live-caption-demo.mov).
+
+Twitch channel: [xidist](https://www.twitch.tv/xidist).
 
 ## 2026-11-05 — Mouth Wah Mini prototype
 
