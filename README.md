@@ -18,6 +18,12 @@ Instagram: [@xidist.xyz](https://www.instagram.com/xidist.xyz/).
 
 ![Guitar camera in TouchDesigner alongside the xidist.xyz Instagram profile](Image/guitar-instagram-preview.png)
 
+### Live captions
+
+![TouchDesigner audio input and live captions alongside the NTS player](Image/2026-11-06-nts-live-captions.png)
+
+The on-screen captions transcribe audio from David Holmes' November 24, 2025 NTS broadcast, [Humanity as an Act of Resistance — The Protest Edition on SoundCloud](https://soundcloud.com/user-202286394-991268468/humanity-as-an-act-of).
+
 ## Signal flow
 
 ```mermaid
