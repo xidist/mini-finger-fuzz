@@ -6,6 +6,10 @@ Open your mouth to sweep the wah toward a brighter sound. Close it to bring the 
 
 This project grew out of Finger Fuzz, a prototype that used a thumb–index pinch to control a guitar effect. Mouth Wah Mini keeps the camera-driven interaction and moves the control to your jaw.
 
+## Jaw-to-wah starter kit
+
+The [starter kit](jaw-to-wah/README.md) includes a standalone Python controller, eight automated tests, and integration notes for MediaPipe and TouchDesigner. The tests cover calibration, clamping, smoothing, tracking loss and recovery, and invalid inputs and timestamps. The webcam, OSC, and audio checks are listed separately for local validation.
+
 ## Stream demo
 
 ![Looping preview of the November 6 Gyazo demo](Image/2026-11-06-gyazo-demo.gif)
