@@ -2,6 +2,8 @@
 
 The controller converts timestamped jaw scores into a normalized wah control. It uses only Python's standard library. Tracking, OSC transport, and audio processing belong to the integration layer.
 
+The [evaluation scorecard](SCORECARD.md) provides the shared trial brief, scoring rubric, and results log for comparing Perplexity Search and Computer.
+
 ## Controller contract
 
 - Set `closed` and `opened` to representative normalized jaw scores with `0 <= closed < opened <= 1`. As a starting calibration, take the median of a short stable recording at rest and the median at a comfortable open position. Repeat calibration if the readings overlap or the endpoints are too close to give a stable sweep.
