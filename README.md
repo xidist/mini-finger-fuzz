@@ -6,6 +6,15 @@ Open your mouth to sweep the wah toward a brighter sound. Close it to bring the 
 
 This project grew out of Finger Fuzz, a prototype that used a thumb–index pinch to control a guitar effect. Mouth Wah Mini keeps the camera-driven interaction and moves the control to your jaw.
 
+## Fuzz Wah in Perform Mode
+
+Open the [More Drive TouchDesigner preset](Fuzz%20Wah%20-%20Voodoo%20Child%20-%20More%20Drive.toe) and enter Perform Mode. The patch runs the mouth-controlled wah into fuzz, with adjustable Overdrive. The spectrum shows the input in cyan and the processed output in orange.
+
+- **Play guitar.** Select your guitar interface as input and your laptop speakers or headphones as output. Open and close your mouth to sweep the wah.
+- **Adjust while fretting.** Keep your left hand on the neck. Raise your open right palm, wait for **Raised hand active**, then pinch and slide sideways. Thumb + index changes **Sweep Range**, thumb + middle changes **Resonance**, and thumb + ring changes **Output Wah Volume**. Lower your hand to hold the setting and resume picking.
+- **Use two hands.** Raise both palms to adjust two different sliders at once. Raise both index fingers and vary the distance between them to adjust **Overdrive**.
+- **Try speech.** Enable **Mic In** to route your microphone through the same effects. Start at low output volume or use headphones. The live speech test is next.
+
 ## Jaw-to-wah starter kit
 
 The [starter kit](jaw-to-wah/README.md) includes a standalone Python controller, eight automated tests, and integration notes for MediaPipe and TouchDesigner. The tests cover calibration, clamping, smoothing, tracking loss and recovery, and invalid inputs and timestamps. The webcam, OSC, and audio checks are listed separately for local validation.
