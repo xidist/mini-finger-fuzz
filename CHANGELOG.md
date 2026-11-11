@@ -4,6 +4,7 @@ Progress notes for Finger Fuzz and its current Mouth Wah Mini prototype.
 
 ## 2026-11-11 — Fuzz Wah More Drive
 
+- Published the [Fuzz Wah demo with audio](Movie/2026-11-11-fuzz-wah-demo.mp4).
 - Documented the [More Drive preset and Perform Mode controls](README.md#fuzz-wah-in-perform-mode).
 - Added independent raised-palm activation for pinch controls. The picking hand can adjust a slider while the other hand stays on the guitar neck, and two raised hands can adjust separate sliders together.
 - Kept two-index-finger Overdrive control and the **Mic In** switch for testing the wah and fuzz with a microphone.

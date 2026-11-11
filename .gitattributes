@@ -1,3 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 *.toe filter=lfs diff=lfs merge=lfs -text
+Movie/2026-11-11-fuzz-wah-demo.mp4 filter=lfs diff=lfs merge=lfs -text

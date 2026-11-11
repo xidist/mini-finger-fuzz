@@ -10,6 +10,8 @@ This project grew out of Finger Fuzz, a prototype that used a thumb–index pinc
 
 Open the [More Drive TouchDesigner preset](Fuzz%20Wah%20-%20Voodoo%20Child%20-%20More%20Drive.toe) and enter Perform Mode. The patch runs the mouth-controlled wah into fuzz, with adjustable Overdrive. The spectrum shows the input in cyan and the processed output in orange.
 
+[Download the Fuzz Wah demo](Movie/2026-11-11-fuzz-wah-demo.mp4)
+
 - **Play guitar.** Select your guitar interface as input and your laptop speakers or headphones as output. Open and close your mouth to sweep the wah.
 - **Adjust while fretting.** Keep your left hand on the neck. Raise your open right palm, wait for **Raised hand active**, then pinch and slide sideways. Thumb + index changes **Sweep Range**, thumb + middle changes **Resonance**, and thumb + ring changes **Output Wah Volume**. Lower your hand to hold the setting and resume picking.
 - **Use two hands.** Raise both palms to adjust two different sliders at once. Raise both index fingers and vary the distance between them to adjust **Overdrive**.
