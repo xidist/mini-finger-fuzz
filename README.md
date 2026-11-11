@@ -15,7 +15,7 @@ Open the [More Drive TouchDesigner preset](Fuzz%20Wah%20-%20Voodoo%20Child%20-%2
 - **Play guitar.** Select your guitar interface as input and your laptop speakers or headphones as output. Open and close your mouth to sweep the wah.
 - **Adjust while fretting.** Keep your left hand on the neck. Raise your open right palm, wait for **Raised hand active**, then pinch and slide sideways. Thumb + index changes **Sweep Range**, thumb + middle changes **Resonance**, and thumb + ring changes **Output Wah Volume**. Lower your hand to hold the setting and resume picking.
 - **Use two hands.** Raise both palms to adjust two different sliders at once. Raise both index fingers and vary the distance between them to adjust **Overdrive**.
-- **Try speech.** Enable **Mic In** to route your microphone through the same effects. Start at low output volume or use headphones. The live speech test is next.
+- **Record and play back speech.** Open the [Speech Capture preset](Fuzz%20Wah%20-%20Speech%20Capture.toe), enable **Mic In**, and select **Record Speech**. The speakers stay muted during recording. Select **Stop Recording** and then **Play Take** to hear the processed take with the microphone off.
 
 ## Jaw-to-wah starter kit
 
