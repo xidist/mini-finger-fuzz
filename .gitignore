@@ -1,0 +1,4 @@
+# Track only the current TouchDesigner release.
+/demo wah toes/
+*.toe
+!/git001-mini finger fuzz.21.toe
