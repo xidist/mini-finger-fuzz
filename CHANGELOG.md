@@ -2,13 +2,21 @@
 
 Progress notes for Finger Fuzz and its current Mouth Wah Mini prototype.
 
+## 2026-11-11 — Fuzz Wah Speech Capture
+
+- Routed the processed wah signal directly to the recorder and preserved the input sample rate in the WAV.
+- Boosted quiet takes during playback while keeping **Output Wah Volume** in control. Verified recording and playback routing on a MacBook.
+- Set Speech Capture to use the built-in audio devices on a Mac and the default input and output devices on Windows. Windows playback still needs a live check.
+
+![Speech Capture mixer in Perform Mode with Mic In enabled and a five-second take ready to play](Image/2026-11-11-speech-capture-perform.png)
+
 ## 2026-11-11 — Fuzz Wah More Drive
 
 - Published the [Fuzz Wah demo with audio](Movie/2026-11-11-fuzz-wah-demo.mp4).
 - Documented the [More Drive preset and Perform Mode controls](README.md#fuzz-wah-in-perform-mode).
 - Added independent raised-palm activation for pinch controls. The picking hand can adjust a slider while the other hand stays on the guitar neck, and two raised hands can adjust separate sliders together.
 - Kept two-index-finger Overdrive control and the **Mic In** switch for testing the wah and fuzz with a microphone.
-- During live guitar testing, both spectrum traces showed signal and the sliders held steady while picking. Raised-palm adjustment passed simulated gesture checks. Live raised-palm adjustment and speech tests are pending.
+- During live guitar testing, both spectrum traces showed signal and the sliders held steady while picking. Raised-palm adjustment passed simulated gesture checks. Live raised-palm adjustment is pending.
 
 ## 2026-11-06 — Audio spectrum and live captions
 

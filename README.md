@@ -17,6 +17,10 @@ Open the [More Drive TouchDesigner preset](Fuzz%20Wah%20-%20Voodoo%20Child%20-%2
 - **Use two hands.** Raise both palms to adjust two different sliders at once. Raise both index fingers and vary the distance between them to adjust **Overdrive**.
 - **Record and play back speech.** Open the [Speech Capture preset](Fuzz%20Wah%20-%20Speech%20Capture.toe), enable **Mic In**, and select **Record Speech**. The speakers stay muted during recording. Select **Stop Recording** and then **Play Take** to hear the processed take with the microphone off.
 
+Speech Capture uses the default Windows input and output devices or the built-in mic and speakers on a Mac. Quiet takes get a playback boost, and **Output Wah Volume** controls the listening level.
+
+![Speech Capture mixer in Perform Mode with Mic In enabled and a five-second take ready to play](Image/2026-11-11-speech-capture-perform.png)
+
 ## Jaw-to-wah starter kit
 
 The [starter kit](jaw-to-wah/README.md) includes a standalone Python controller, eight automated tests, and integration notes for MediaPipe and TouchDesigner. The tests cover calibration, clamping, smoothing, tracking loss and recovery, and invalid inputs and timestamps. The webcam, OSC, and audio checks are listed separately for local validation.
